@@ -1,0 +1,12 @@
+{% extends 'layout.html.twig' %}
+
+{% block title %}{{ post.title }}{% endblock %}
+{% block meta_keywords %}{{ post.keywords }}{% endblock %}
+{% block meta_description %}{{ post.description }}{% endblock %}
+
+{% block content %}
+    <div class="container mt-4">
+        <h1>{{ post.title }}</h1>
+        <div class="post-content">{{ post.content|raw }}</div>
+    </div>
+{% endblock %}

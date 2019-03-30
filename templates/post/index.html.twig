@@ -1,0 +1,22 @@
+{% extends 'layout.html.twig' %}
+
+{% block title %}Статьи{% endblock %}
+
+{% block content %}
+    <div class="container mt-4">
+        {% for post in pagination.currentPageResults %}
+            <div class="card mb-2">
+                <h5 class="card-header">Автор: {{ post.author.email }}</h5>
+                <div class="card-body">
+                    <h5 class="card-title">{{ post.title }}</h5>
+                    <p class="card-text">{{ post.content|raw }}</p>
+                    <a href="{{ path('post_show', {id: post.id}) }}" class="btn btn-primary">Подробнее</a>
+                </div>
+            </div>
+        {% endfor %}
+
+        <div class="pagerfanta">
+            {{ pagerfanta(pagination, 'twitter_bootstrap4') }}
+        </div>
+    </div>
+{% endblock %}
