@@ -17,6 +17,8 @@ class UserFixtures extends Fixture
         $admin = new User();
         $admin
             ->setEmail('admin@mail.com')
+            ->setFirstName('Адилет')
+            ->setLastName('Мурзалиев')
             ->setUsername('admin')
             ->setPlainPassword('12345')
             ->setEnabled(true)
@@ -27,6 +29,8 @@ class UserFixtures extends Fixture
         $user = new User();
         $user
             ->setEmail('user1@mail.com')
+            ->setFirstName('Пользователь')
+            ->setLastName('Первый')
             ->setUsername('user1')
             ->setPlainPassword('12345')
             ->setEnabled(true)
@@ -37,6 +41,8 @@ class UserFixtures extends Fixture
         $user = new User();
         $user
             ->setEmail('user2@mail.com')
+            ->setFirstName('Пользователь')
+            ->setLastName('Второй')
             ->setUsername('user2')
             ->setPlainPassword('12345')
             ->setEnabled(true)
