@@ -37,7 +37,7 @@ class PostController extends Controller
     }
 
     /**
-     * @Route("/show/{id}", name="post_show")
+     * @Route("/show/{slug}", name="post_show")
      *
      * @param Post $post
      * @return Response
