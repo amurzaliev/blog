@@ -1,0 +1,19 @@
+{% extends "@FOSUser/layout.html.twig" %}
+
+{% block fos_user_content %}
+    {% trans_default_domain 'FOSUserBundle' %}
+
+    <div class="row">
+        <div class="col-md-4"></div>
+        <div class="col-md-4">
+            {{ form_start(form, {'method': 'post', 'action': path('fos_user_registration_register'), 'attr': {'class': 'fos_user_registration_register'}}) }}
+            {{ form_widget(form) }}
+            <div>
+                <input type="submit" class="btn btn-primary" value="Регистрация"/>
+            </div>
+            {{ form_end(form) }}
+        </div>
+        <div class="col-md-4"></div>
+    </div>
+
+{% endblock fos_user_content %}
