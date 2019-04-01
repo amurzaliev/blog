@@ -102,7 +102,7 @@ class PostController extends Controller
     public function removeAction(Post $post, EntityManagerInterface $manager)
     {
         $this->denyAccessUnlessGranted('remove', $post);
-        $manager->remove($post);
+        $post->setDeleted(true);
         $manager->flush();
 
         return $this->redirectToRoute('profile_posts');

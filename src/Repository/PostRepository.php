@@ -23,6 +23,7 @@ class PostRepository extends ServiceEntityRepository
     public function getLastPostsQuery()
     {
         return $this->createQueryBuilder('p')
+            ->where('p.deleted = false')
             ->orderBy('p.createdAt', 'desc')
             ->getQuery();
     }
@@ -30,7 +31,8 @@ class PostRepository extends ServiceEntityRepository
     public function getLastPostsByUserQuery(User $user)
     {
         return $this->createQueryBuilder('p')
-            ->where('p.author = :author')
+            ->andWhere('p.author = :author')
+            ->andWhere('p.deleted = false')
             ->setParameter('author', $user)
             ->orderBy('p.createdAt', 'desc')
             ->getQuery();

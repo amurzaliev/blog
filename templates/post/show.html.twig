@@ -8,5 +8,21 @@
     <div class="container mt-4">
         <h1>{{ post.title }}</h1>
         <div class="post-content">{{ post.content|raw }}</div>
+        <hr>
+        <h2>Комментарии</h2>
+        {% for comment in post.comments %}
+            <p><strong>{{ comment.author }}: </strong>{{ comment.content }}</p>
+        {% else %}
+            <p>Комментариев нет</p>
+        {% endfor %}
+
+        {% if form %}
+        {{ form_start(form) }}
+        {{ form_widget(form) }}
+        <div class="form-group">
+            <input type="submit" class="btn btn-primary" value="Комментировать">
+        </div>
+        {{ form_end(form) }}
+        {% endif %}
     </div>
 {% endblock %}

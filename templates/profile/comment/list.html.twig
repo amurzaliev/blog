@@ -1,0 +1,22 @@
+{% extends 'profile/layout.html.twig' %}
+
+{% block title %}Мои комментарии{% endblock %}
+
+{% block content %}
+    <div class="container mt-4">
+        {% for comment in pagination.currentPageResults %}
+            <div class="card mb-2">
+                <div class="card-body">
+                    <h5 class="card-title">{{ comment.post.title }}</h5>
+                    <p class="card-text">{{ comment.content }} <a
+                                href="{{ path('profile_comment_remove', {id: comment.id}) }}" class="btn btn-danger">Удалить</a>
+                    </p>
+                </div>
+            </div>
+        {% endfor %}
+
+        <div class="pagerfanta">
+            {{ pagerfanta(pagination, 'twitter_bootstrap4') }}
+        </div>
+    </div>
+{% endblock %}
