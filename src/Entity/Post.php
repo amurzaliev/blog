@@ -43,7 +43,7 @@ class Post
     /**
      * @var User
      *
-     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="createdAt")
+     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="posts")
      * @ORM\JoinColumn(nullable=false)
      */
     private $author;

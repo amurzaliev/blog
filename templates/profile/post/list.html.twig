@@ -1,0 +1,23 @@
+{% extends 'profile/layout.html.twig' %}
+
+{% block title %}Мои статьи{% endblock %}
+
+{% block content %}
+    <div class="container mt-4">
+        <a href="{{ path('profile_post_add') }}" class="btn btn-success mb-2">Добавить статью</a>
+        {% for post in pagination.currentPageResults %}
+            <div class="card mb-2">
+                <div class="card-body">
+                    <h5 class="card-title">{{ post.title }}</h5>
+                    <p class="card-text">{{ post.content|raw }}</p>
+                    <a href="{{ path('profile_post_edit', {id: post.id}) }}" class="btn btn-primary">Редактировать</a>
+                    <a href="{{ path('profile_post_remove', {id: post.id}) }}" class="btn btn-danger">Удалить</a>
+                </div>
+            </div>
+        {% endfor %}
+
+        <div class="pagerfanta">
+            {{ pagerfanta(pagination, 'twitter_bootstrap4') }}
+        </div>
+    </div>
+{% endblock %}

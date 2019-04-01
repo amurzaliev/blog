@@ -7,7 +7,6 @@ use App\Repository\PostRepository;
 use Pagerfanta\Adapter\DoctrineORMAdapter;
 use Pagerfanta\Pagerfanta;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -22,13 +21,12 @@ class PostController extends Controller
     /**
      * @Route("/", name="post_index")
      *
-     * @param Request $request
      * @param PostRepository $postRepository
      * @return Response
      */
-    public function indexAction(Request $request, PostRepository $postRepository)
+    public function indexAction(PostRepository $postRepository)
     {
-        $adapter    = new DoctrineORMAdapter($postRepository->createQueryBuilder('p'));
+        $adapter    = new DoctrineORMAdapter($postRepository->getLastPostsQuery());
         $pagerFanta = new Pagerfanta($adapter);
 
         return $this->render('post/index.html.twig', [

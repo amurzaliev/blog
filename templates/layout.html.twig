@@ -16,6 +16,7 @@
                     </li>
                 </ul>
                 {% if is_granted('ROLE_USER') %}
+                    <a href="{{ path('profile_index') }}" class="btn btn-warning mr-2">Личный кабинет</a>
                     <a href="{{ path('fos_user_security_logout') }}" class="btn btn-danger">Завершить сеанс</a>
                 {% else %}
                     <a href="{{ path('fos_user_registration_register') }}" class="btn btn-primary mr-2">Регистрация</a>
