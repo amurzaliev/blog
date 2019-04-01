@@ -36,3 +36,15 @@ services:
         arguments: [~, App\Entity\Post, ~]
         tags:
             - {name: sonata.admin, manager_type: orm, label: Статьи}
+
+    admin.comment:
+        class: App\Admin\CommentAdmin
+        arguments: [~, App\Entity\Comment, ~]
+        tags:
+            - {name: sonata.admin, manager_type: orm, label: Комментарии}
+
+    admin.user:
+        class: App\Admin\UserAdmin
+        arguments: [~, App\Entity\User, ~]
+        tags:
+            - {name: sonata.admin, manager_type: orm, label: Пользователи}

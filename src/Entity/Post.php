@@ -88,8 +88,8 @@ class Post
     public function __construct()
     {
         $this->createdAt = new DateTime();
-        $this->comments = new ArrayCollection();
-        $this->deleted = false;
+        $this->comments  = new ArrayCollection();
+        $this->deleted   = false;
     }
 
     public function getId(): ?int
@@ -222,5 +222,10 @@ class Post
         $this->deleted = $deleted;
 
         return $this;
+    }
+
+    public function __toString(): string
+    {
+        return $this->title ?? '';
     }
 }

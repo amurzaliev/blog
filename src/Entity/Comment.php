@@ -59,7 +59,7 @@ class Comment
     public function __construct()
     {
         $this->createdAt = new \DateTime();
-        $this->deleted = false;
+        $this->deleted   = false;
     }
 
     public function getId(): ?int
@@ -125,5 +125,10 @@ class Comment
         $this->deleted = $deleted;
 
         return $this;
+    }
+
+    public function __toString(): string
+    {
+        return $this->author ?? '';
     }
 }

@@ -2,11 +2,24 @@ sonata_admin:
   title: 'Blog Admin'
   dashboard:
     groups:
+
       posts:
         on_top: true
         label: Статьи
         items:
           - admin.post
+
+      comments:
+        on_top: true
+        label: Комментарии
+        items:
+          - admin.comment
+
+      users:
+        on_top: true
+        label: Пользователи
+        items:
+          - admin.user
 
     blocks:
       - { type: sonata.admin.block.admin_list, position: left }
