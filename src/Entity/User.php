@@ -49,11 +49,19 @@ class User extends BaseUser
      */
     private $comments;
 
+    /**
+     * @var ArrayCollection
+     *
+     * @ORM\OneToMany(targetEntity="App\Entity\PostRating", mappedBy="user", orphanRemoval=true)
+     */
+    private $postRatings;
+
     public function __construct()
     {
         parent::__construct();
         $this->posts = new ArrayCollection();
         $this->comments = new ArrayCollection();
+        $this->postRatings = new ArrayCollection();
     }
 
     /**
@@ -136,6 +144,37 @@ class User extends BaseUser
             // set the owning side to null (unless already changed)
             if ($comment->getAuthor() === $this) {
                 $comment->setAuthor(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|PostRating[]
+     */
+    public function getPostRatings(): Collection
+    {
+        return $this->postRatings;
+    }
+
+    public function addPostRating(PostRating $postRating): self
+    {
+        if (!$this->postRatings->contains($postRating)) {
+            $this->postRatings[] = $postRating;
+            $postRating->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removePostRating(PostRating $postRating): self
+    {
+        if ($this->postRatings->contains($postRating)) {
+            $this->postRatings->removeElement($postRating);
+            // set the owning side to null (unless already changed)
+            if ($postRating->getUser() === $this) {
+                $postRating->setUser(null);
             }
         }
 

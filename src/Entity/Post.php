@@ -85,11 +85,26 @@ class Post
      */
     private $deleted;
 
+    /**
+     * @var float
+     *
+     * @ORM\Column(type="decimal", precision=10, scale=2, nullable=true)
+     */
+    private $avgRating;
+
+    /**
+     * @var ArrayCollection
+     *
+     * @ORM\OneToMany(targetEntity="App\Entity\PostRating", mappedBy="post", orphanRemoval=true)
+     */
+    private $postRatings;
+
     public function __construct()
     {
         $this->createdAt = new DateTime();
         $this->comments  = new ArrayCollection();
         $this->deleted   = false;
+        $this->postRatings = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -227,5 +242,48 @@ class Post
     public function __toString(): string
     {
         return $this->title ?? '';
+    }
+
+    public function getAvgRating()
+    {
+        return $this->avgRating;
+    }
+
+    public function setAvgRating($avgRating): self
+    {
+        $this->avgRating = $avgRating;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|PostRating[]
+     */
+    public function getPostRatings(): Collection
+    {
+        return $this->postRatings;
+    }
+
+    public function addPostRating(PostRating $postRating): self
+    {
+        if (!$this->postRatings->contains($postRating)) {
+            $this->postRatings[] = $postRating;
+            $postRating->setPost($this);
+        }
+
+        return $this;
+    }
+
+    public function removePostRating(PostRating $postRating): self
+    {
+        if ($this->postRatings->contains($postRating)) {
+            $this->postRatings->removeElement($postRating);
+            // set the owning side to null (unless already changed)
+            if ($postRating->getPost() === $this) {
+                $postRating->setPost(null);
+            }
+        }
+
+        return $this;
     }
 }

@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\CommentRepository")
@@ -22,6 +23,7 @@ class Comment
      * @var string
      *
      * @ORM\Column(type="text")
+     * @Assert\Length(max="10", maxMessage="Слишком длинный комментарий")
      */
     private $content;
 

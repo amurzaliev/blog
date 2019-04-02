@@ -4,8 +4,12 @@ namespace App\Controller;
 
 use App\Entity\Comment;
 use App\Entity\Post;
+use App\Entity\PostRating;
 use App\Form\CommentType;
+use App\Form\PostRatingType;
+use App\Repository\PostRatingRepository;
 use App\Repository\PostRepository;
+use App\Service\PostRatingService;
 use Doctrine\ORM\EntityManagerInterface;
 use Pagerfanta\Adapter\DoctrineORMAdapter;
 use Pagerfanta\Pagerfanta;
@@ -44,34 +48,56 @@ class PostController extends Controller
      * @param Post $post
      * @param Request $request
      * @param EntityManagerInterface $manager
+     * @param PostRatingRepository $postRatingRepository
+     * @param PostRatingService $postRatingService
      * @return Response
      */
-    public function showAction(Post $post, Request $request, EntityManagerInterface $manager)
+    public function showAction(Post $post, Request $request, EntityManagerInterface $manager, PostRatingRepository $postRatingRepository, PostRatingService $postRatingService)
     {
-        $formView = null;
+        $comment     = new Comment();
+        $commentForm = $this->createForm(CommentType::class, $comment);
+        $commentForm->handleRequest($request);
 
-        if ($this->getUser()) {
-            $comment = new Comment();
+        if ($commentForm->isSubmitted() && $commentForm->isValid()) {
+            $comment->setAuthor($this->getUser());
+            $comment->setPost($post);
 
-            $form = $this->createForm(CommentType::class, $comment);
-            $form->handleRequest($request);
+            $manager->persist($comment);
+            $manager->flush();
 
-            if ($form->isSubmitted() && $form->isValid()) {
-                $comment->setAuthor($this->getUser());
-                $comment->setPost($post);
+            return $this->redirectToRoute('post_show', ['slug' => $post->getSlug()]);
+        }
 
-                $manager->persist($comment);
+        $ratingFormView = null;
+
+        if (!$this->getUser()) {
+            $ratingFormView = null;
+        } elseif ($postRatingRepository->findUserPostRating($this->getUser()) || $post->getAuthor() === $this->getUser()) {
+            $ratingFormView = null;
+        } else {
+            $postRating = new PostRating();
+            $ratingForm = $this->createForm(PostRatingType::class, $postRating);
+            $ratingForm->handleRequest($request);
+
+            if ($ratingForm->isSubmitted() && $ratingForm->isValid()) {
+                $postRating->setPost($post);
+                $postRating->setUser($this->getUser());
+
+                $manager->persist($postRating);
                 $manager->flush();
+
+                $postRatingService->recalculateRating($post);
 
                 return $this->redirectToRoute('post_show', ['slug' => $post->getSlug()]);
             }
 
-            $formView = $form->createView();
+            $ratingFormView = $ratingForm->createView();
         }
 
         return $this->render('post/show.html.twig', [
-            'post' => $post,
-            'form' => $formView
+            'post'        => $post,
+            'commentForm' => $commentForm->createView(),
+            'ratingForm'  => $ratingFormView
         ]);
     }
 }

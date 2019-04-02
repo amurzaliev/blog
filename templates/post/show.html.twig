@@ -7,6 +7,7 @@
 {% block content %}
     <div class="container mt-4">
         <h1>{{ post.title }}</h1>
+        <p class="text-primary">Рейтинг: {{ post.avgRating|number_format(1, '.', ',') }}</p>
         <div class="post-content">{{ post.content|raw }}</div>
         <hr>
         <h2>Комментарии</h2>
@@ -16,13 +17,27 @@
             <p>Комментариев нет</p>
         {% endfor %}
 
-        {% if form %}
-        {{ form_start(form) }}
-        {{ form_widget(form) }}
-        <div class="form-group">
-            <input type="submit" class="btn btn-primary" value="Комментировать">
-        </div>
-        {{ form_end(form) }}
+        {% if app.user %}
+            <div class="row">
+                <div class="col-md-8">
+                    {{ form_start(commentForm) }}
+                    {{ form_widget(commentForm) }}
+                    <div class="form-group">
+                        <input type="submit" class="btn btn-primary" value="Комментировать">
+                    </div>
+                    {{ form_end(commentForm) }}
+                </div>
+                <div class="col-md-4">
+                    {% if ratingForm %}
+                        {{ form_start(ratingForm) }}
+                        {{ form_widget(ratingForm) }}
+                        <div class="form-group">
+                            <input type="submit" class="btn btn-primary" value="Оценить">
+                        </div>
+                        {{ form_end(ratingForm) }}
+                    {% endif %}
+                </div>
+            </div>
         {% endif %}
     </div>
 {% endblock %}

@@ -37,4 +37,15 @@ class PostRepository extends ServiceEntityRepository
             ->orderBy('p.createdAt', 'desc')
             ->getQuery();
     }
+
+    public function getAverageRating(Post $post)
+    {
+        return $this->createQueryBuilder('p')
+            ->select('AVG(r.rating) as avgRating')
+            ->join('p.postRatings', 'r')
+            ->where('p.id = :post')
+            ->setParameter('post', $post)
+            ->getQuery()
+            ->getSingleScalarResult();
+    }
 }

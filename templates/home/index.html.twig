@@ -3,5 +3,12 @@
 {% block title %}Блог{% endblock %}
 
 {% block content %}
-
+    <div class="container">
+        <h1 class="mt-4">Список пользователей</h1>
+        <hr>
+        <p><strong>ROLE_ADMIN:</strong> admin@mail.com / 12345 <a href="{{ path('sonata_admin_dashboard') }}">войти в
+                админку</a></p>
+        <p><strong>ROLE_USER:</strong> user1@mail.com / 12345</p>
+        <p><strong>ROLE_USER:</strong> user2@mail.com / 12345</p>
+    </div>
 {% endblock %}
