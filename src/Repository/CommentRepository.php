@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\Comment;
+use App\Entity\Post;
 use App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Symfony\Bridge\Doctrine\RegistryInterface;
@@ -28,5 +29,16 @@ class CommentRepository extends ServiceEntityRepository
             ->setParameter('author', $user)
             ->orderBy('c.createdAt', 'desc')
             ->getQuery();
+    }
+
+    public function getPostsByPost(Post $post)
+    {
+        return $this->createQueryBuilder('c')
+            ->andWhere('c.post = :postId')
+            ->setParameter('postId', $post)
+            ->andWhere('c.deleted = false')
+            ->orderBy('c.createdAt', 'desc')
+            ->getQuery()
+            ->getArrayResult();
     }
 }

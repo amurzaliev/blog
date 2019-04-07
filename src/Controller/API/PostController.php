@@ -29,11 +29,15 @@ class PostController
      */
     public function getPosts(Request $request, PostRepository $postRepository)
     {
-        $page  = $request->query->getInt('page', 1);
-        $limit = $request->query->getInt('limit', 5);
-        $posts = $postRepository->getLastPostsApiQuery($page, $limit);
+        try {
+            $page  = $request->query->getInt('page', 1);
+            $limit = $request->query->getInt('limit', 5);
+            $posts = $postRepository->getLastPostsApiQuery($page, $limit);
 
-        return new JsonResponse(['posts' => $posts, 'success' => true]);
+            return new JsonResponse(['posts' => $posts, 'success' => true]);
+        } catch (Exception $e) {
+            return new JsonResponse(['success' => false, 'error' => $e->getMessage()]);
+        }
     }
 
     /**

@@ -31,5 +31,18 @@
     </code>
 </pre>
         <p class="text-primary">POST: /api/post/<strong>{post_id}</strong>/remove</p>
+
+        <h3 class="text-center">Комментарии</h3>
+        <p class="text-primary">GET: /api/post/<strong>{post_id}</strong>/comments</p>
+        <p class="text-primary">POST: /post/<strong>{post_id}</strong>/comment/add</p>
+        <p>Тело запроса:</p>
+        <pre>
+    <code>
+    'content'  => 'Comment message'
+    </code>
+</pre>
+        <p class="text-primary">POST: /api/post/<strong>{comment_id}</strong>/remove</p>
     </div>
+
+
 {% endblock %}

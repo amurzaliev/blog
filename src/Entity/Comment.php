@@ -23,7 +23,7 @@ class Comment
      * @var string
      *
      * @ORM\Column(type="text")
-     * @Assert\Length(max="10", maxMessage="Слишком длинный комментарий")
+     * @Assert\Length(max="200", maxMessage="Слишком длинный комментарий")
      */
     private $content;
 
