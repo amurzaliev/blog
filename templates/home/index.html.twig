@@ -15,13 +15,13 @@
         <p>HTTP авторизация - <em>curl -u username:password</em></p>
 
         <h3 class="text-center">Статьи</h3>
-        <p class="text-primary">GET: /api/posts</p>
+        <p class="text-primary">&#187; GET: /api/posts</p>
         <p>Параметры:</p>
         <ul>
             <li><strong>page</strong> - int, default = 1</li>
             <li><strong>limit</strong> - int, default = 5</li>
         </ul>
-        <p class="text-primary">POST: /api/post/add</p>
+        <p class="text-primary">&#187; POST: /api/post/add</p>
         <p>Тело запроса:</p>
 <pre>
     <code>
@@ -30,18 +30,25 @@
     'content'  => 'Content html'
     </code>
 </pre>
-        <p class="text-primary">POST: /api/post/<strong>{post_id}</strong>/remove</p>
+        <p class="text-primary">&#187; POST: /post/<strong>{post_id}</strong>/rate</p>
+        <p>Тело запроса:</p>
+<pre>
+    <code>
+    'rating'  => 1 to 5
+    </code>
+</pre>
+        <p class="text-primary">&#187; POST: /api/post/<strong>{post_id}</strong>/remove</p>
 
         <h3 class="text-center">Комментарии</h3>
-        <p class="text-primary">GET: /api/post/<strong>{post_id}</strong>/comments</p>
-        <p class="text-primary">POST: /post/<strong>{post_id}</strong>/comment/add</p>
+        <p class="text-primary">&#187; GET: /api/post/<strong>{post_id}</strong>/comments</p>
+        <p class="text-primary">&#187; POST: /post/<strong>{post_id}</strong>/comment/add</p>
         <p>Тело запроса:</p>
         <pre>
     <code>
     'content'  => 'Comment message'
     </code>
 </pre>
-        <p class="text-primary">POST: /api/post/<strong>{comment_id}</strong>/remove</p>
+        <p class="text-primary">&#187; POST: /api/post/<strong>{comment_id}</strong>/remove</p>
     </div>
 
 
