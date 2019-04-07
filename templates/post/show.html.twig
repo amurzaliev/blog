@@ -38,6 +38,8 @@
                     {% endif %}
                 </div>
             </div>
+        {% else %}
+            <p><a href="{{ path('fos_user_security_login') }}">Войдите</a>, чтобы оставлять отзывы и комментарии.</p>
         {% endif %}
     </div>
 {% endblock %}

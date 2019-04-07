@@ -15,7 +15,10 @@
                         <a class="nav-link" href="{{ path('post_index') }}">Статьи</a>
                     </li>
                 </ul>
-                {% if is_granted('ROLE_USER') %}
+
+                {% if is_granted('ROLE_ADMIN') %}
+                    <a href="{{ path('fos_user_security_logout') }}" class="btn btn-danger">Завершить сеанс</a>
+                {% elseif is_granted('ROLE_USER') %}
                     <a href="{{ path('profile_index') }}" class="btn btn-warning mr-2">Личный кабинет</a>
                     <a href="{{ path('fos_user_security_logout') }}" class="btn btn-danger">Завершить сеанс</a>
                 {% else %}

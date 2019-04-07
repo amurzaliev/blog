@@ -28,6 +28,19 @@ class PostRepository extends ServiceEntityRepository
             ->getQuery();
     }
 
+    public function getLastPostsApiQuery(int $page, int $limit)
+    {
+        $offset = ($page * $limit) - $limit;
+        return $this->createQueryBuilder('p')
+            ->select('p.id, IDENTITY(p.author) as author_id, p.title, p.content, p.createdAt, p.avgRating')
+            ->where('p.deleted = false')
+            ->orderBy('p.createdAt', 'desc')
+            ->setFirstResult($offset)
+            ->setMaxResults($limit)
+            ->getQuery()
+            ->getArrayResult();
+    }
+
     public function getLastPostsByUserQuery(User $user)
     {
         return $this->createQueryBuilder('p')

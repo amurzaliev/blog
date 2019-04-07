@@ -4,11 +4,32 @@
 
 {% block content %}
     <div class="container">
-        <h1 class="mt-4">Список пользователей</h1>
-        <hr>
+        <h2 class="m-4">Список пользователей</h2>
         <p><strong>ROLE_ADMIN:</strong> admin@mail.com / 12345 <a href="{{ path('sonata_admin_dashboard') }}">войти в
                 админку</a></p>
         <p><strong>ROLE_USER:</strong> user1@mail.com / 12345</p>
         <p><strong>ROLE_USER:</strong> user2@mail.com / 12345</p>
+        <hr>
+
+        <h2 class="m-4">API</h2>
+        <p>HTTP авторизация - <em>curl -u username:password</em></p>
+
+        <h3 class="text-center">Статьи</h3>
+        <p class="text-primary">GET: /api/posts</p>
+        <p>Параметры:</p>
+        <ul>
+            <li><strong>page</strong> - int, default = 1</li>
+            <li><strong>limit</strong> - int, default = 5</li>
+        </ul>
+        <p class="text-primary">POST: /api/post/add</p>
+        <p>Тело запроса:</p>
+<pre>
+    <code>
+    'title'    => 'Post title',
+    'slug'     => 'Post slug',
+    'content'  => 'Content html'
+    </code>
+</pre>
+        <p class="text-primary">POST: /api/post/<strong>{post_id}</strong>/remove</p>
     </div>
 {% endblock %}
