@@ -1,0 +1,44 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="container">
+        <h2 class="mt-4 mb-4">Scraper form:</h2>
+        <form method="post" action="{{ path('scraper') }}">
+            <div class="form-group">
+                <label for="exampleFormControlTextarea1">Enter domains with http(s) scheme (one per line):</label>
+                <textarea class="form-control" id="exampleFormControlTextarea1" rows="5"
+                          placeholder="https://example.com" name="content">{{ content }}</textarea>
+            </div>
+            <div class="form-group">
+                <label for="exampleInputPassword1">Enter secret code:</label>
+                <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Code..." name="code"
+                       value="{{ code }}">
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+        <h2 class="mt-4 mb-4">Output:</h2>
+        {% if success %}
+            {% for domain in data %}
+                <p><strong>Domain:</strong> {{ domain.name }}</p>
+                <p>Pages:</p>
+                <ul>
+                    {% for page in domain.pages %}
+                        <li>
+                            {{ page.name }}
+                            {% if(page.external_links|length > 0) %}
+                                <br>External links:
+                                <ul>
+                                    {% for link in page.external_links %}
+                                        <li>{{ link }}</li>
+                                    {% endfor %}
+                                </ul>
+                            {% endif %}
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% endfor %}
+        {% else %}
+            Invalid input!
+        {% endif %}
+    </div>
+{% endblock %}
