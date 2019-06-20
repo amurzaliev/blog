@@ -34,7 +34,7 @@ class HomeController extends Controller
 
         $result = [];
 
-        if ($request->get('code') === '11') {
+        if ($request->get('code') === 'upwork') {
             foreach ($domains as $domain) {
                 if ($domain) {
                     $result[$domain] = [
