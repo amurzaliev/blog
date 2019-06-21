@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Referral download page{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <h1 class="mt-4 mb-4">Referral download page</h1>
+        <p> Your personal referral link:
+            <a href="{{ url('referral_index', {referral: referralHash}) }}">{{ url('referral_index', {referral: referralHash}) }}</a>
+        </p>
+        <button class="btn btn-primary">Download</button>
+        <h2 class="mt-4 mb-4">Referrals & visits:</h2>
+        <ul>
+            {% for visit in visits %}
+                <li><strong>Referral ID:</strong> {{ visit.referralHash }}, <strong>Visitor
+                        IP:</strong> {{ visit.visitorIp }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+{% endblock %}
