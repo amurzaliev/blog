@@ -29,11 +29,12 @@ class ReferralController extends Controller
     public function index(Request $request, ReferralVisitorRepository $referralVisitorRepository, EntityManagerInterface $manager)
     {
         if ($hash = $request->get('referral')) {
-            if (!$referralVisitorRepository->findOneBy(['referralHash' => $hash])) {
+            $visitorIp = $request->getClientIp();
+            if (!$referralVisitorRepository->findOneBy(['referralHash' => $hash, 'visitorIp' => $visitorIp])) {
                 $referralVisitor = new ReferralVisitor();
                 $referralVisitor
                     ->setReferralHash($hash)
-                    ->setVisitorIp($request->getClientIp());
+                    ->setVisitorIp($visitorIp);
 
                 $manager->persist($referralVisitor);
                 $manager->flush();
