@@ -23,6 +23,16 @@ class HomeController extends Controller
     }
 
     /**
+     * @Route("/blogger-page", name="blogger_page")
+     */
+    public function blogPage()
+    {
+        return $this->render('home/blogger_page.html.twig', [
+
+        ]);
+    }
+
+    /**
      * @Route("/scraper", name="scraper")
      *
      * @param Request $request

@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link href="https://js.violet.io/default.css" rel="stylesheet" type="text/css"/>
+{% endblock %}
+
+{% block head_js %}
+    {{ parent() }}
+    <script src="https://js.violet.io"></script>
+{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <h1>Simple Blog Page</h1>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque dolorum ducimus enim maiores modi quis
+            reiciendis unde vitae. Culpa cumque eius nam velit. Ad aliquam consequuntur dolorum id placeat quis tenetur
+            veritatis voluptate? A accusamus culpa cum dolore dolorum ducimus eos illo laboriosam optio ratione
+            repudiandae sapiente sequi, tenetur voluptatem?
+        </p>
+        <div id="violet-cart"></div><!-- "Buy now" button position -->
+        <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+        <script src="http://adseek.demo.sibers.com/js/blog-app.js" app="10023"
+                key="429baf13e84e462f945dd9a63bd49815" referral="be4ab352-9d86-11e9-8340-3497f65b2557"
+                product="6f42bbb77d0d4fe0a87472cf742d8cde" host="http://adseek.demo.sibers.com/"></script>
+
+    </div>
+{% endblock %}
