@@ -23,12 +23,14 @@ class HomeController extends Controller
     }
 
     /**
-     * @Route("/blogger-page", name="blogger_page")
+     * @Route("/blogger-page/{id}", name="blogger_page")
+     * @param int $id
+     * @return Response
      */
-    public function blogPage()
+    public function blogPage(int $id)
     {
         return $this->render('home/blogger_page.html.twig', [
-
+            'page' => $id
         ]);
     }
 

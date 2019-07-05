@@ -18,11 +18,22 @@
             veritatis voluptate? A accusamus culpa cum dolore dolorum ducimus eos illo laboriosam optio ratione
             repudiandae sapiente sequi, tenetur voluptatem?
         </p>
-        <div id="violet-cart"></div><!-- "Buy now" button position -->
-        <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-        <script src="https://adseek.demo.sibers.com/js/blog-app.js" app="10023"
-                key="429baf13e84e462f945dd9a63bd49815" referral="be4ab352-9d86-11e9-8340-3497f65b2557"
-                product="6f42bbb77d0d4fe0a87472cf742d8cde" host="https://adseek.demo.sibers.com/"></script>
+
+        {% if page == 1 %}
+            <div id="violet-cart"></div><!-- "Buy now" button position -->
+            <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+            <script src="https://adseek.demo.sibers.com/js/blog-app.js" app="10023"
+                    key="429baf13e84e462f945dd9a63bd49815" referral="be4ab352-9d86-11e9-8340-3497f65b2557"
+                    product="6f42bbb77d0d4fe0a87472cf742d8cde" host="https://adseek.demo.sibers.com/"></script>
+        {% elseif page = 2 %}
+            <div id="violet-cart"></div><!-- "Buy now" button position -->
+            <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+            <script src="https://adseek.demo.sibers.com/js/blog-app.js" app="10023"
+                    key="429baf13e84e462f945dd9a63bd49815" referral="be4ab352-9d86-11e9-8340-3497f65b2557"
+                    product="6f42bbb77d0d4fe0a87472cf742d8cde" host="https://adseek.demo.sibers.com/"></script>
+        {% else %}
+            None
+        {% endif %}
 
     </div>
 {% endblock %}
